@@ -23,7 +23,8 @@ def get_image_dataloaders(
     num_workers: int = 0,
     low_data: str = None,
     segmentations: bool = False,
-    folder: str = 'images'
+    folder: str = 'images',
+    train_only: bool = False
 ):
     print('Loading data. This might take a while...')
 
@@ -41,12 +42,16 @@ def get_image_dataloaders(
       train_ds = DATASET('train_lowdata_3', img_size, folder)
     else:
       train_ds = DATASET('train', img_size, folder)
-    val_ds = DATASET('val', img_size, folder)
-    test_ds = DATASET('test', img_size, folder)
-
     train_dl = DataLoader(train_ds, batch_size, shuffle=True, num_workers=num_workers)
-    val_dl = DataLoader(val_ds, batch_size, shuffle=False, num_workers=num_workers)
-    test_dl = DataLoader(test_ds, batch_size, shuffle=False, num_workers=num_workers)
+
+    val_dl = None
+    test_dl = None
+    if train_only:
+        val_ds = DATASET('val', img_size, folder)
+        test_ds = DATASET('test', img_size, folder)
+
+        val_dl = DataLoader(val_ds, batch_size, shuffle=False, num_workers=num_workers)
+        test_dl = DataLoader(test_ds, batch_size, shuffle=False, num_workers=num_workers)
 
     return {'train': train_dl, 'val': val_dl, 'test': test_dl}
 
