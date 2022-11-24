@@ -33,8 +33,8 @@ def get_image_dataloaders(
         DATASET = BrainAgeImageDataset
     if low_data == '100':
       train_ds = DATASET('train_lowdata_100', img_size, folder)
-    elif low_data == '50':
-      train_ds = DATASET('train_lowdata_50', img_size, folder)
+    elif low_data == '200':
+      train_ds = DATASET('train_lowdata_200', img_size, folder)
     elif low_data == '5':
       train_ds = DATASET('train_lowdata_5', img_size, folder)
     elif low_data == '3':
@@ -62,9 +62,9 @@ class BrainSegmentationDataset(Dataset):
         elif mode == 'train_lowdata_100':
             self.df = pd.read_csv(os.path.join(
                 DATA_DIR, 'meta', 'meta_data_regression_train_lowdata.csv'))        
-        elif mode == 'train_lowdata_50':
+        elif mode == 'train_lowdata_200':
             self.df = pd.read_csv(os.path.join(
-                DATA_DIR, 'meta', 'meta_data_regression_train_lowdata_50.csv'))       
+                DATA_DIR, 'meta', 'meta_data_regression_train_lowdata_200.csv'))       
         elif mode == 'train_lowdata_5':
             self.df = pd.read_csv(os.path.join(
                 DATA_DIR, 'meta', 'meta_data_regression_train_lowdata_5.csv'))  
