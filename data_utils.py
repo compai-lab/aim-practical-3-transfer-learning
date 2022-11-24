@@ -46,7 +46,7 @@ def get_image_dataloaders(
 
     val_dl = None
     test_dl = None
-    if train_only:
+    if not train_only:
         val_ds = DATASET('val', img_size, folder)
         test_ds = DATASET('test', img_size, folder)
 
